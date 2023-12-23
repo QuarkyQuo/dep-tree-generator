@@ -1,0 +1,89 @@
+{
+  "name": "dep-tree-generator",
+  "displayName": "Dep-Tree-Generator",
+  "description": "Dependency tree generator for Node based Project",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "dep-tree-generator.gen",
+        "title": "Generate Tree"
+      },
+      {
+        "command": "nodeDependencies.addNew",
+        "title": "Add"
+      },
+      {
+        "command": "nodeDependencies.refreshEntry",
+        "title": "Refresh Tree",
+        "icon": {
+            "light": "./out/refresh.svg",
+            "dark": "./out/refresh.svg"
+        }
+    }
+    ],
+    "viewsWelcome": [
+      {
+        "view": "nodeDependencies",
+        "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addNew)"
+      }
+    ],
+    "views": {
+      "package-explorer": [
+        {
+          "id": "nodeDependencies",
+          "name": "Node Dependencies"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "package-explorer",
+          "title": "Package Explorer",
+          "icon": "./out/react.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+          {
+              "command": "nodeDependencies.refreshEntry",
+              "when": "view == nodeDependencies",
+              "group": "navigation"
+          },
+          {
+            "command": "nodeDependencies.addNew",
+            "when": "view == nodeDependencies"
+        }
+      ]
+  }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8"
+  }
+}
